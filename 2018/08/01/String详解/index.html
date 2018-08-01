@@ -3,19 +3,22 @@
 <head>
   <meta charset="utf-8">
   
-  <title>hello world | Hexo</title>
+  <title>String 详解 | Hexo</title>
   <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
-  <meta name="description" content="前言使用github pages服务搭建博客的好处有：  全是静态文件，访问速度快； 免费方便，不用花一分钱就可以搭建一个自由的个人博客，不需要服务器不需要后台； 可以随意绑定自己的域名，不仔细看的话根本看不出来你的网站是基于github的；">
+  <meta name="description" content="前言：    String在面试中堪为屡问不爽， 当然其在java开发中确是不可或缺的，在此总结以慰猿生。">
+<meta name="keywords" content="-java">
 <meta property="og:type" content="article">
-<meta property="og:title" content="hello world">
-<meta property="og:url" content="http://yoursite.com/2018/08/01/hello-world-1/index.html">
+<meta property="og:title" content="String 详解">
+<meta property="og:url" content="http://yoursite.com/2018/08/01/String详解/index.html">
 <meta property="og:site_name" content="Hexo">
-<meta property="og:description" content="前言使用github pages服务搭建博客的好处有：  全是静态文件，访问速度快； 免费方便，不用花一分钱就可以搭建一个自由的个人博客，不需要服务器不需要后台； 可以随意绑定自己的域名，不仔细看的话根本看不出来你的网站是基于github的；">
+<meta property="og:description" content="前言：    String在面试中堪为屡问不爽， 当然其在java开发中确是不可或缺的，在此总结以慰猿生。">
 <meta property="og:locale" content="default">
-<meta property="og:updated_time" content="2018-08-01T04:57:34.168Z">
+<meta property="og:image" content="http://yoursite.com/2018/08/01/String详解/string属性.jpg">
+<meta property="og:updated_time" content="2018-08-01T10:14:23.432Z">
 <meta name="twitter:card" content="summary">
-<meta name="twitter:title" content="hello world">
-<meta name="twitter:description" content="前言使用github pages服务搭建博客的好处有：  全是静态文件，访问速度快； 免费方便，不用花一分钱就可以搭建一个自由的个人博客，不需要服务器不需要后台； 可以随意绑定自己的域名，不仔细看的话根本看不出来你的网站是基于github的；">
+<meta name="twitter:title" content="String 详解">
+<meta name="twitter:description" content="前言：    String在面试中堪为屡问不爽， 当然其在java开发中确是不可或缺的，在此总结以慰猿生。">
+<meta name="twitter:image" content="http://yoursite.com/2018/08/01/String详解/string属性.jpg">
   
     <link rel="alternative" href="/atom.xml" title="Hexo" type="application/atom+xml">
   
@@ -31,7 +34,7 @@
   <div id="container">
     <div id="wrap">
       <div class="outer">
-        <section id="main"><article id="post-hello-world-1" class="article article-type-post" itemscope itemprop="blogPost">
+        <section id="main"><article id="post-String详解" class="article article-type-post" itemscope itemprop="blogPost">
   
   <div class="article-inner">
     
@@ -39,31 +42,33 @@
         
   
     <h1 class="article-title" itemprop="name">
-      hello world
+      String 详解
     </h1>
   
 
       </header>
     
     <div class="article-meta">
-      <a href="/2018/08/01/hello-world-1/" class="article-date">
-  <time datetime="2018-08-01T04:54:47.000Z" itemprop="datePublished">2018-08-01</time>
+      <a href="/2018/08/01/String详解/" class="article-date">
+  <time datetime="2018-08-01T09:51:23.000Z" itemprop="datePublished">2018-08-01</time>
 </a>
       
     </div>
     <div class="article-entry" itemprop="articleBody">
       
-        <h1 id="前言"><a href="#前言" class="headerlink" title="前言"></a>前言</h1><p>使用github pages服务搭建博客的好处有：</p>
-<ol>
-<li>全是静态文件，访问速度快；</li>
-<li>免费方便，不用花一分钱就可以搭建一个自由的个人博客，不需要服务器不需要后台；</li>
-<li>可以随意绑定自己的域名，不仔细看的话根本看不出来你的网站是基于github的；</li>
-</ol>
+        <p>前言：<br>    String在面试中堪为屡问不爽， 当然其在java开发中确是不可或缺的，在此总结以慰猿生。</p>
 <a id="more"></a>
-<ol start="4">
-<li>数据绝对安全，基于github的版本管理，想恢复到哪个历史版本都行；</li>
-<li>博客内容可以轻松打包、转移、发布到其它平台；</li>
-<li>等等；</li>
+<ol>
+<li><p>实现接口<br> Serializable对于对象文件传输使用（serialVersionUID）<br> Comparable 需要实现该接口方法， 常用于排序<br> CharSequence 字符接口</p>
+</li>
+<li><p>属性</p>
+ <img src="/2018/08/01/String详解/string属性.jpg" title="string属性图片">
+<p> value[] 是一个char类型的数组， 可以看出string也是在数组的基础上来实现的。<br> hash string</p>
+</li>
+<li><p>构造方法<br> 这里需要提出的就是入参为数组的构造方法<br> public String(char value[]) {</p>
+<pre><code>this.value = Arrays.copyOf(value, value.length);
+</code></pre><p> }<br> 使用了系统的数组复制操作。</p>
+</li>
 </ol>
 
       
@@ -76,19 +81,10 @@
     
 <nav id="article-nav">
   
-    <a href="/2018/08/01/String详解/" id="article-nav-newer" class="article-nav-link-wrap">
-      <strong class="article-nav-caption">Newer</strong>
-      <div class="article-nav-title">
-        
-          String 详解
-        
-      </div>
-    </a>
   
-  
-    <a href="/2018/08/01/hello-world/" id="article-nav-older" class="article-nav-link-wrap">
+    <a href="/2018/08/01/hello-world-1/" id="article-nav-older" class="article-nav-link-wrap">
       <strong class="article-nav-caption">Older</strong>
-      <div class="article-nav-title">Hello World</div>
+      <div class="article-nav-title">hello world</div>
     </a>
   
 </nav>
@@ -158,7 +154,7 @@
 <script>
   var disqus_shortname = 'XXX';
   
-  var disqus_url = 'http://yoursite.com/2018/08/01/hello-world-1/';
+  var disqus_url = 'http://yoursite.com/2018/08/01/String详解/';
   
   (function(){
     var dsq = document.createElement('script');

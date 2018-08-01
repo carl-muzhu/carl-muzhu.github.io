@@ -6,7 +6,7 @@
   <link href="/atom.xml" rel="self"/>
   
   <link href="http://yoursite.com/"/>
-  <updated>2018-08-01T04:57:34.168Z</updated>
+  <updated>2018-08-01T10:14:23.432Z</updated>
   <id>http://yoursite.com/</id>
   
   <author>
@@ -15,6 +15,26 @@
   </author>
   
   <generator uri="http://hexo.io/">Hexo</generator>
+  
+  <entry>
+    <title>String 详解</title>
+    <link href="http://yoursite.com/2018/08/01/String%E8%AF%A6%E8%A7%A3/"/>
+    <id>http://yoursite.com/2018/08/01/String详解/</id>
+    <published>2018-08-01T09:51:23.000Z</published>
+    <updated>2018-08-01T10:14:23.432Z</updated>
+    
+    <content type="html"><![CDATA[<p>前言：<br>    String在面试中堪为屡问不爽， 当然其在java开发中确是不可或缺的，在此总结以慰猿生。</p><a id="more"></a><ol><li><p>实现接口<br> Serializable对于对象文件传输使用（serialVersionUID）<br> Comparable 需要实现该接口方法， 常用于排序<br> CharSequence 字符接口</p></li><li><p>属性</p> <img src="/2018/08/01/String详解/string属性.jpg" title="string属性图片"><p> value[] 是一个char类型的数组， 可以看出string也是在数组的基础上来实现的。<br> hash string</p></li><li><p>构造方法<br> 这里需要提出的就是入参为数组的构造方法<br> public String(char value[]) {</p><pre><code>this.value = Arrays.copyOf(value, value.length);</code></pre><p> }<br> 使用了系统的数组复制操作。</p></li></ol>]]></content>
+    
+    <summary type="html">
+    
+      &lt;p&gt;前言：&lt;br&gt;    String在面试中堪为屡问不爽， 当然其在java开发中确是不可或缺的，在此总结以慰猿生。&lt;/p&gt;
+    
+    </summary>
+    
+    
+      <category term="-java" scheme="http://yoursite.com/tags/java/"/>
+    
+  </entry>
   
   <entry>
     <title>hello world</title>
@@ -44,7 +64,7 @@
     <link href="http://yoursite.com/2018/08/01/hello-world/"/>
     <id>http://yoursite.com/2018/08/01/hello-world/</id>
     <published>2018-08-01T03:23:25.295Z</published>
-    <updated>2018-08-01T03:23:25.296Z</updated>
+    <updated>2018-08-01T09:47:08.760Z</updated>
     
     <content type="html"><![CDATA[<p>Welcome to <a href="https://hexo.io/" target="_blank" rel="noopener">Hexo</a>! This is your very first post. Check <a href="https://hexo.io/docs/" target="_blank" rel="noopener">documentation</a> for more info. If you get any problems when using Hexo, you can find the answer in <a href="https://hexo.io/docs/troubleshooting.html" target="_blank" rel="noopener">troubleshooting</a> or you can ask me on <a href="https://github.com/hexojs/hexo/issues" target="_blank" rel="noopener">GitHub</a>.</p><h2 id="Quick-Start"><a href="#Quick-Start" class="headerlink" title="Quick Start"></a>Quick Start</h2><h3 id="Create-a-new-post"><a href="#Create-a-new-post" class="headerlink" title="Create a new post"></a>Create a new post</h3><figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">$ hexo new <span class="string">"My New Post"</span></span><br></pre></td></tr></table></figure><p>More info: <a href="https://hexo.io/docs/writing.html" target="_blank" rel="noopener">Writing</a></p><h3 id="Run-server"><a href="#Run-server" class="headerlink" title="Run server"></a>Run server</h3><figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">$ hexo server</span><br></pre></td></tr></table></figure><p>More info: <a href="https://hexo.io/docs/server.html" target="_blank" rel="noopener">Server</a></p><h3 id="Generate-static-files"><a href="#Generate-static-files" class="headerlink" title="Generate static files"></a>Generate static files</h3><figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">$ hexo generate</span><br></pre></td></tr></table></figure><p>More info: <a href="https://hexo.io/docs/generating.html" target="_blank" rel="noopener">Generating</a></p><h3 id="Deploy-to-remote-sites"><a href="#Deploy-to-remote-sites" class="headerlink" title="Deploy to remote sites"></a>Deploy to remote sites</h3><figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">$ hexo deploy</span><br></pre></td></tr></table></figure><p>More info: <a href="https://hexo.io/docs/deployment.html" target="_blank" rel="noopener">Deployment</a></p>]]></content>
     
@@ -57,6 +77,8 @@
     
     </summary>
     
+    
+      <category term="-tag1" scheme="http://yoursite.com/tags/tag1/"/>
     
   </entry>
   

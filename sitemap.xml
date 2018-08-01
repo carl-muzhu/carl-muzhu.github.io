@@ -15,32 +15,4 @@
     
   </url>
   
-  <url>
-    <loc>http://yoursite.com/tags/index-1.html</loc>
-    
-    <lastmod>2018-08-01T09:49:15.222Z</lastmod>
-    
-  </url>
-  
-  <url>
-    <loc>http://yoursite.com/2018/08/01/hello-world/</loc>
-    
-    <lastmod>2018-08-01T09:47:08.760Z</lastmod>
-    
-  </url>
-  
-  <url>
-    <loc>http://yoursite.com/tags/index.html</loc>
-    
-    <lastmod>2018-08-01T09:46:58.891Z</lastmod>
-    
-  </url>
-  
-  <url>
-    <loc>http://yoursite.com/2018/08/01/hello-world-1/</loc>
-    
-    <lastmod>2018-08-01T04:57:34.168Z</lastmod>
-    
-  </url>
-  
 </urlset>

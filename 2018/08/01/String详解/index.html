@@ -5,19 +5,19 @@
   
   <title>String 详解 | Hexo</title>
   <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
-  <meta name="description" content="前言： 	String在面试中堪为屡问不爽， 当然其在java开发中确是不可或缺的，在此总结以慰猿生。 &amp;lt;!-- more --&amp;gt;   实现接口 Serializable对于对象文件传输使用（serialVersionUID） Comparable 需要实现该接口方法， 常用于排序 CharSequence 字符接口   属性  value[] 是一个char类型的数组， 可以看出st">
+  <meta name="description" content="前言：    String在面试中堪为屡问不爽， 当然其在java开发中确是不可或缺的，在此总结以慰猿生。">
 <meta name="keywords" content="-java">
 <meta property="og:type" content="article">
 <meta property="og:title" content="String 详解">
 <meta property="og:url" content="http://yoursite.com/2018/08/01/String详解/index.html">
 <meta property="og:site_name" content="Hexo">
-<meta property="og:description" content="前言： 	String在面试中堪为屡问不爽， 当然其在java开发中确是不可或缺的，在此总结以慰猿生。 &amp;lt;!-- more --&amp;gt;   实现接口 Serializable对于对象文件传输使用（serialVersionUID） Comparable 需要实现该接口方法， 常用于排序 CharSequence 字符接口   属性  value[] 是一个char类型的数组， 可以看出st">
+<meta property="og:description" content="前言：    String在面试中堪为屡问不爽， 当然其在java开发中确是不可或缺的，在此总结以慰猿生。">
 <meta property="og:locale" content="default">
 <meta property="og:image" content="http://yoursite.com/2018/08/01/String详解/string属性.jpg">
 <meta property="og:updated_time" content="2018-08-01T10:14:23.432Z">
 <meta name="twitter:card" content="summary">
 <meta name="twitter:title" content="String 详解">
-<meta name="twitter:description" content="前言： 	String在面试中堪为屡问不爽， 当然其在java开发中确是不可或缺的，在此总结以慰猿生。 &amp;lt;!-- more --&amp;gt;   实现接口 Serializable对于对象文件传输使用（serialVersionUID） Comparable 需要实现该接口方法， 常用于排序 CharSequence 字符接口   属性  value[] 是一个char类型的数组， 可以看出st">
+<meta name="twitter:description" content="前言：    String在面试中堪为屡问不爽， 当然其在java开发中确是不可或缺的，在此总结以慰猿生。">
 <meta name="twitter:image" content="http://yoursite.com/2018/08/01/String详解/string属性.jpg">
   
     <link rel="alternative" href="/atom.xml" title="Hexo" type="application/atom+xml">
@@ -56,29 +56,18 @@
     </div>
     <div class="article-entry" itemprop="articleBody">
       
-        <p>前言：
-	String在面试中堪为屡问不爽， 当然其在java开发中确是不可或缺的，在此总结以慰猿生。</p>
-<p>&lt;!-- more --&gt;</p>
+        <p>前言：<br>    String在面试中堪为屡问不爽， 当然其在java开发中确是不可或缺的，在此总结以慰猿生。</p>
+<a id="more"></a>
 <ol>
-<li>
-<p>实现接口
-Serializable对于对象文件传输使用（serialVersionUID）
-Comparable 需要实现该接口方法， 常用于排序
-CharSequence 字符接口</p>
+<li><p>实现接口<br> Serializable对于对象文件传输使用（serialVersionUID）<br> Comparable 需要实现该接口方法， 常用于排序<br> CharSequence 字符接口</p>
 </li>
-<li>
-<p>属性
-<img src="/2018/08/01/String详解/string属性.jpg" title="string属性图片">
-value[] 是一个char类型的数组， 可以看出string也是在数组的基础上来实现的。
-hash string</p>
+<li><p>属性</p>
+ <img src="/2018/08/01/String详解/string属性.jpg" title="string属性图片">
+<p> value[] 是一个char类型的数组， 可以看出string也是在数组的基础上来实现的。<br> hash string</p>
 </li>
-<li>
-<p>构造方法
-这里需要提出的就是入参为数组的构造方法
-public String(char value[]) {
-this.value = Arrays.copyOf(value, value.length);
-}
-使用了系统的数组复制操作。</p>
+<li><p>构造方法<br> 这里需要提出的就是入参为数组的构造方法<br> public String(char value[]) {</p>
+<pre><code>this.value = Arrays.copyOf(value, value.length);
+</code></pre><p> }<br> 使用了系统的数组复制操作。</p>
 </li>
 </ol>
 
@@ -90,16 +79,6 @@ this.value = Arrays.copyOf(value, value.length);
   </div>
   
     
-<nav id="article-nav">
-  
-  
-    <a href="/2018/08/01/hello-world-1/" id="article-nav-older" class="article-nav-link-wrap">
-      <strong class="article-nav-caption">Older</strong>
-      <div class="article-nav-title">hello world</div>
-    </a>
-  
-</nav>
-
   
 </article>
 

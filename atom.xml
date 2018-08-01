@@ -6,7 +6,7 @@
   <link href="/atom.xml" rel="self"/>
   
   <link href="http://yoursite.com/"/>
-  <updated>2018-08-01T14:05:42.544Z</updated>
+  <updated>2018-08-01T14:18:51.874Z</updated>
   <id>http://yoursite.com/</id>
   
   <author>
@@ -21,7 +21,7 @@
     <link href="http://yoursite.com/2018/08/01/String%E8%AF%A6%E8%A7%A3/"/>
     <id>http://yoursite.com/2018/08/01/String详解/</id>
     <published>2018-08-01T09:51:23.000Z</published>
-    <updated>2018-08-01T14:05:42.544Z</updated>
+    <updated>2018-08-01T14:18:51.874Z</updated>
     
     <content type="html"><![CDATA[<p>前言：<br>    String在面试中堪为屡问不爽， 当然其在java开发中确是不可或缺的，在此总结以慰猿生。</p><a id="more"></a><ol><li><p>实现接口<br> Serializable对于对象文件传输使用（serialVersionUID）<br> Comparable 需要实现该接口方法， 常用于排序<br> CharSequence 字符接口</p></li><li><p>属性</p> <img src="/2018/08/01/String详解/string属性.jpg" title="string属性图片"><p> value[] 是一个char类型的数组， 可以看出string也是在数组的基础上来实现的。<br> hash string</p></li><li><p>构造方法<br> 这里需要提出的就是入参为数组的构造方法<br> public String(char value[]) {</p><pre><code>this.value = Arrays.copyOf(value, value.length);</code></pre><p> }<br> 使用了系统的数组复制操作。<br> 构造方法同时还满足了String和char、 StringBuilder以及byte等的转换。</p></li><li><p>长度和判空以及indexOf<br> length：<br> public int length() {</p><pre><code>return value.length;</code></pre><p> }</p><p> 判空：<br> public boolean isEmpty() {</p><pre><code>return value.length == 0;</code></pre><p> }<br> 实际上转化为对char数组的操作。</p><p> indexOf：<br> 一般用于判断字串中特殊字符串的位置，具体实现是通过多个indexOf方法重载解决的。大致逻辑如下：<br> a. 从source的首个字符抑或sourceoffset+fromindex开始的首个字符匹配target字符串的首个字符，如果匹配上则开始指针后移匹配第二个，直到将目标字串匹配完成返回最后一个匹配的字符的数组索引。<br> b. 匹配失败则返回-1.<br> c. 如果匹配空字符串则返回0.</p></li><li><p>equals<br> String重写了Object的方法， 所以初级java开发面试中，此项常考。<br> public boolean equals(Object anObject) {</p><pre><code>if (this == anObject) {    return true;}if (anObject instanceof String) {    String anotherString = (String)anObject;    int n = value.length;    if (n == anotherString.value.length) {        char v1[] = value;        char v2[] = anotherString.value;        int i = 0;        while (n-- != 0) {            if (v1[i] != v2[i])                return false;            i++;        }        return true;    }}return false;</code></pre><p> }</p></li></ol>]]></content>
     
@@ -32,7 +32,7 @@
     </summary>
     
     
-      <category term="-java" scheme="http://yoursite.com/tags/java/"/>
+      <category term="-java -zookeeper" scheme="http://yoursite.com/tags/java-zookeeper/"/>
     
   </entry>
   

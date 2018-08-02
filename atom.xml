@@ -37,22 +37,6 @@
   </entry>
   
   <entry>
-    <title>test zookeeper</title>
-    <link href="http://yoursite.com/2018/08/02/test-zookeeper/"/>
-    <id>http://yoursite.com/2018/08/02/test-zookeeper/</id>
-    <published>2018-08-02T03:52:23.000Z</published>
-    <updated>2018-08-02T03:52:38.844Z</updated>
-    
-    <summary type="html">
-    
-    </summary>
-    
-    
-      <category term="-zookeeper" scheme="http://yoursite.com/tags/zookeeper/"/>
-    
-  </entry>
-  
-  <entry>
     <title>String 详解</title>
     <link href="http://yoursite.com/2018/08/01/String%E8%AF%A6%E8%A7%A3/"/>
     <id>http://yoursite.com/2018/08/01/String详解/</id>

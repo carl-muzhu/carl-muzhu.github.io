@@ -5,19 +5,19 @@
   
   <title>String 详解 | Hexo</title>
   <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
-  <meta name="description" content="前言： 	String在面试中堪为屡问不爽， 当然其在java开发中确是不可或缺的，在此总结以慰猿生。 &amp;lt;!-- more --&amp;gt;   实现接口 Serializable对于对象文件传输使用（serialVersionUID） Comparable 需要实现该接口方法， 常用于排序 CharSequence 字符接口   属性  value[] 是一个char类型的数组， 可以看出st">
+  <meta name="description" content="前言：    String在面试中堪为屡问不爽， 当然其在java开发中确是不可或缺的，在此总结以慰猿生。">
 <meta name="keywords" content="-java">
 <meta property="og:type" content="article">
 <meta property="og:title" content="String 详解">
 <meta property="og:url" content="http://yoursite.com/2018/08/01/String详解/index.html">
 <meta property="og:site_name" content="Hexo">
-<meta property="og:description" content="前言： 	String在面试中堪为屡问不爽， 当然其在java开发中确是不可或缺的，在此总结以慰猿生。 &amp;lt;!-- more --&amp;gt;   实现接口 Serializable对于对象文件传输使用（serialVersionUID） Comparable 需要实现该接口方法， 常用于排序 CharSequence 字符接口   属性  value[] 是一个char类型的数组， 可以看出st">
+<meta property="og:description" content="前言：    String在面试中堪为屡问不爽， 当然其在java开发中确是不可或缺的，在此总结以慰猿生。">
 <meta property="og:locale" content="default">
 <meta property="og:image" content="http://yoursite.com/2018/08/01/String详解/string属性.jpg">
 <meta property="og:updated_time" content="2018-08-02T03:50:41.536Z">
 <meta name="twitter:card" content="summary">
 <meta name="twitter:title" content="String 详解">
-<meta name="twitter:description" content="前言： 	String在面试中堪为屡问不爽， 当然其在java开发中确是不可或缺的，在此总结以慰猿生。 &amp;lt;!-- more --&amp;gt;   实现接口 Serializable对于对象文件传输使用（serialVersionUID） Comparable 需要实现该接口方法， 常用于排序 CharSequence 字符接口   属性  value[] 是一个char类型的数组， 可以看出st">
+<meta name="twitter:description" content="前言：    String在面试中堪为屡问不爽， 当然其在java开发中确是不可或缺的，在此总结以慰猿生。">
 <meta name="twitter:image" content="http://yoursite.com/2018/08/01/String详解/string属性.jpg">
   
     <link rel="alternative" href="/atom.xml" title="Hexo" type="application/atom+xml">
@@ -56,72 +56,48 @@
     </div>
     <div class="article-entry" itemprop="articleBody">
       
-        <p>前言：
-	String在面试中堪为屡问不爽， 当然其在java开发中确是不可或缺的，在此总结以慰猿生。</p>
-<p>&lt;!-- more --&gt;</p>
+        <p>前言：<br>    String在面试中堪为屡问不爽， 当然其在java开发中确是不可或缺的，在此总结以慰猿生。</p>
+<a id="more"></a>
 <ol>
-<li>
-<p>实现接口
-Serializable对于对象文件传输使用（serialVersionUID）
-Comparable 需要实现该接口方法， 常用于排序
-CharSequence 字符接口</p>
+<li><p>实现接口<br> Serializable对于对象文件传输使用（serialVersionUID）<br> Comparable 需要实现该接口方法， 常用于排序<br> CharSequence 字符接口</p>
 </li>
-<li>
-<p>属性
-<img src="/2018/08/01/String详解/string属性.jpg" title="string属性图片">
-value[] 是一个char类型的数组， 可以看出string也是在数组的基础上来实现的。
-hash string</p>
+<li><p>属性</p>
+ <img src="/2018/08/01/String详解/string属性.jpg" title="string属性图片">
+<p> value[] 是一个char类型的数组， 可以看出string也是在数组的基础上来实现的。<br> hash string</p>
 </li>
-<li>
-<p>构造方法
-这里需要提出的就是入参为数组的构造方法
-public String(char value[]) {
-this.value = Arrays.copyOf(value, value.length);
-}
-使用了系统的数组复制操作。
-构造方法同时还满足了String和char、 StringBuilder以及byte等的转换。</p>
+<li><p>构造方法<br> 这里需要提出的就是入参为数组的构造方法<br> public String(char value[]) {</p>
+<pre><code>this.value = Arrays.copyOf(value, value.length);
+</code></pre><p> }<br> 使用了系统的数组复制操作。<br> 构造方法同时还满足了String和char、 StringBuilder以及byte等的转换。</p>
 </li>
-<li>
-<p>长度和判空以及indexOf
-length：
-public int length() {
-return value.length;
-}</p>
-<p>判空：
-public boolean isEmpty() {
-return value.length == 0;
-}
-实际上转化为对char数组的操作。</p>
-<p>indexOf：
-一般用于判断字串中特殊字符串的位置，具体实现是通过多个indexOf方法重载解决的。大致逻辑如下：
-a. 从source的首个字符抑或sourceoffset+fromindex开始的首个字符匹配target字符串的首个字符，如果匹配上则开始指针后移匹配第二个，直到将目标字串匹配完成返回最后一个匹配的字符的数组索引。
-b. 匹配失败则返回-1.
-c. 如果匹配空字符串则返回0.</p>
+<li><p>长度和判空以及indexOf<br> length：<br> public int length() {</p>
+<pre><code>return value.length;
+</code></pre><p> }</p>
+<p> 判空：<br> public boolean isEmpty() {</p>
+<pre><code>return value.length == 0;
+</code></pre><p> }<br> 实际上转化为对char数组的操作。</p>
+<p> indexOf：<br> 一般用于判断字串中特殊字符串的位置，具体实现是通过多个indexOf方法重载解决的。大致逻辑如下：<br> a. 从source的首个字符抑或sourceoffset+fromindex开始的首个字符匹配target字符串的首个字符，如果匹配上则开始指针后移匹配第二个，直到将目标字串匹配完成返回最后一个匹配的字符的数组索引。<br> b. 匹配失败则返回-1.<br> c. 如果匹配空字符串则返回0.</p>
 </li>
-<li>
-<p>equals
-String重写了Object的方法， 所以初级java开发面试中，此项常考。
-public boolean equals(Object anObject) {
-if (this == anObject) {
-return true;
+<li><p>equals<br> String重写了Object的方法， 所以初级java开发面试中，此项常考。<br> public boolean equals(Object anObject) {</p>
+<pre><code>if (this == anObject) {
+    return true;
 }
 if (anObject instanceof String) {
-String anotherString = (String)anObject;
-int n = value.length;
-if (n == anotherString.value.length) {
-char v1[] = value;
-char v2[] = anotherString.value;
-int i = 0;
-while (n-- != 0) {
-if (v1[i] != v2[i])
+    String anotherString = (String)anObject;
+    int n = value.length;
+    if (n == anotherString.value.length) {
+        char v1[] = value;
+        char v2[] = anotherString.value;
+        int i = 0;
+        while (n-- != 0) {
+            if (v1[i] != v2[i])
+                return false;
+            i++;
+        }
+        return true;
+    }
+}
 return false;
-i++;
-}
-return true;
-}
-}
-return false;
-}</p>
+</code></pre><p> }</p>
 </li>
 </ol>
 
@@ -133,6 +109,20 @@ return false;
   </div>
   
     
+<nav id="article-nav">
+  
+    <a href="/2018/08/02/test-zookeeper/" id="article-nav-newer" class="article-nav-link-wrap">
+      <strong class="article-nav-caption">Newer</strong>
+      <div class="article-nav-title">
+        
+          test zookeeper
+        
+      </div>
+    </a>
+  
+  
+</nav>
+
   
 </article>
 

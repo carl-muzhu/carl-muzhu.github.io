@@ -29,6 +29,41 @@
       <div class="outer">
         <section id="main">
   
+    <article id="post-test-zookeeper" class="article article-type-post" itemscope itemprop="blogPost">
+  
+  <div class="article-inner">
+    
+      <header class="article-header">
+        
+  
+    <h1 itemprop="name">
+      <a class="article-title" href="/2018/08/02/test-zookeeper/">test zookeeper</a>
+    </h1>
+  
+
+      </header>
+    
+    <div class="article-meta">
+      <a href="/2018/08/02/test-zookeeper/" class="article-date">
+  <time datetime="2018-08-02T03:52:23.000Z" itemprop="datePublished">2018-08-02</time>
+</a>
+      
+    </div>
+    <div class="article-entry" itemprop="articleBody">
+      
+        
+      
+
+      
+        
+    </div>
+  </div>
+  
+</article>
+
+
+
+  
     <article id="post-String详解" class="article article-type-post" itemscope itemprop="blogPost">
   
   <div class="article-inner">
@@ -51,75 +86,12 @@
     </div>
     <div class="article-entry" itemprop="articleBody">
       
-        <p>前言：
-	String在面试中堪为屡问不爽， 当然其在java开发中确是不可或缺的，在此总结以慰猿生。</p>
-<p>&lt;!-- more --&gt;</p>
-<ol>
-<li>
-<p>实现接口
-Serializable对于对象文件传输使用（serialVersionUID）
-Comparable 需要实现该接口方法， 常用于排序
-CharSequence 字符接口</p>
-</li>
-<li>
-<p>属性
-<img src="/2018/08/01/String详解/string属性.jpg" title="string属性图片">
-value[] 是一个char类型的数组， 可以看出string也是在数组的基础上来实现的。
-hash string</p>
-</li>
-<li>
-<p>构造方法
-这里需要提出的就是入参为数组的构造方法
-public String(char value[]) {
-this.value = Arrays.copyOf(value, value.length);
-}
-使用了系统的数组复制操作。
-构造方法同时还满足了String和char、 StringBuilder以及byte等的转换。</p>
-</li>
-<li>
-<p>长度和判空以及indexOf
-length：
-public int length() {
-return value.length;
-}</p>
-<p>判空：
-public boolean isEmpty() {
-return value.length == 0;
-}
-实际上转化为对char数组的操作。</p>
-<p>indexOf：
-一般用于判断字串中特殊字符串的位置，具体实现是通过多个indexOf方法重载解决的。大致逻辑如下：
-a. 从source的首个字符抑或sourceoffset+fromindex开始的首个字符匹配target字符串的首个字符，如果匹配上则开始指针后移匹配第二个，直到将目标字串匹配完成返回最后一个匹配的字符的数组索引。
-b. 匹配失败则返回-1.
-c. 如果匹配空字符串则返回0.</p>
-</li>
-<li>
-<p>equals
-String重写了Object的方法， 所以初级java开发面试中，此项常考。
-public boolean equals(Object anObject) {
-if (this == anObject) {
-return true;
-}
-if (anObject instanceof String) {
-String anotherString = (String)anObject;
-int n = value.length;
-if (n == anotherString.value.length) {
-char v1[] = value;
-char v2[] = anotherString.value;
-int i = 0;
-while (n-- != 0) {
-if (v1[i] != v2[i])
-return false;
-i++;
-}
-return true;
-}
-}
-return false;
-}</p>
-</li>
-</ol>
-
+        <p>前言：<br>    String在面试中堪为屡问不爽， 当然其在java开发中确是不可或缺的，在此总结以慰猿生。</p>
+        
+          <p class="article-more-link">
+            <a href="/2018/08/01/String详解/#more">More...</a>
+          </p>
+        
       
 
       

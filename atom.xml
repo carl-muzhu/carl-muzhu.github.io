@@ -6,7 +6,7 @@
   <link href="/atom.xml" rel="self"/>
   
   <link href="http://yoursite.com/"/>
-  <updated>2018-08-02T03:52:38.844Z</updated>
+  <updated>2018-08-02T08:03:52.543Z</updated>
   <id>http://yoursite.com/</id>
   
   <author>
@@ -15,6 +15,26 @@
   </author>
   
   <generator uri="http://hexo.io/">Hexo</generator>
+  
+  <entry>
+    <title>zookeeper源码详解一</title>
+    <link href="http://yoursite.com/2018/08/02/zookeeper%E6%BA%90%E7%A0%81%E8%AF%A6%E8%A7%A3%E4%B8%80/"/>
+    <id>http://yoursite.com/2018/08/02/zookeeper源码详解一/</id>
+    <published>2018-08-02T06:50:35.000Z</published>
+    <updated>2018-08-02T08:03:52.543Z</updated>
+    
+    <content type="html"><![CDATA[<p>本章将详细讲解zookeeper本地化安装和使用。</p><a id="more"></a><p>mac使用brew安装更为方便：</p><p>$ brew info zookeeper<br>查看mac可以下载的zk版本信息， 结果如下：<br>zookeeper: stable 3.4.12 (bottled), HEAD<br>Centralized server for distributed coordination of services<br><a href="https://zookeeper.apache.org/" target="_blank" rel="noopener">https://zookeeper.apache.org/</a><br>/usr/local/Cellar/zookeeper/3.4.12 (243 files, 32.9MB) *<br>  Poured from bottle on 2018-05-24 at 18:24:44<br>From: <a href="https://github.com/Homebrew/homebrew-core/blob/master/Formula/zookeeper.rb" target="_blank" rel="noopener">https://github.com/Homebrew/homebrew-core/blob/master/Formula/zookeeper.rb</a><br>==&gt; Dependencies<br>Optional: python@2 ✘<br>==&gt; Options<br>–with-perl<br>    Build Perl bindings<br>--with-python@2<br>    Build with python@2 support<br>–HEAD<br>    Install HEAD version<br>==&gt; Caveats<br>To have launchd start zookeeper now and restart at login:<br>  brew services start zookeeper<br>Or, if you don’t want/need a background service you can just run:<br>  zkServer start</p><p>$ brew install zookeeper<br>使用brew安装zk。</p><p>$ cd /usr/local/etc/zookeeper<br>查看安装情况。<br><img src="/2018/08/02/zookeeper源码详解一/zk_install_dir.jpg" title="zk安装目录"></p><p>$ zkServer<br>启动zk服务端。<br>Using config: /usr/local/etc/zookeeper/zoo.cfg<br>Usage: ./zkServer.sh {start|start-foreground|stop|restart|status|upgrade|print-cmd}</p><p>$ zkServer status<br>ZooKeeper JMX enabled by default<br>Using config: /usr/local/etc/zookeeper/zoo.cfg<br>Error contacting service. It is probably not running.</p><p>$ zkServer start<br>ooKeeper JMX enabled by default<br>Using config: /usr/local/etc/zookeeper/zoo.cfg<br>Starting zookeeper … STARTED</p><p>zk缺省配置下可以本地调用zk client操作。<br>启动zk客户端命令： $ zkCli<br>Connecting to localhost:2181<br>Welcome to ZooKeeper!<br>JLine support is enabled<br>[zk: localhost:2181(CONNECTING) 0]<br>WATCHER::</p><p>WatchedEvent state:SyncConnected type:None path:null</p><p>[zk: localhost:2181(CONNECTED) 0]<br>[zk: localhost:2181(CONNECTED) 0] </p><p>在此已经通过zk服务端已经通过监听默认端口2181和客户端建立tcp长链接， 可以进行你的操作啦。</p><ol start="2"><li><p>zk简单操作篇。<br> 常用命令：<br> 使用ls命令查看当前Zookeeper中所包含的内容：ls /</p><pre><code>[zk: localhost:2181(CONNECTED) 0] ls /[zookeeper][zk: localhost:2181(CONNECTED) 1]</code></pre><p> 创建一个新的Znode节点”zk”，以及和它相关字符，执行命令：create /zk data</p><pre><code>[zk: localhost:2181(CONNECTED) 1] create /zk &lt;内容&gt;Created /zk[zk: localhost:2181(CONNECTED) 2][zk: localhost:2181(CONNECTED) 2] ls /[zk, zookeeper][zk: localhost:2181(CONNECTED) 3] </code></pre><p> 使用get命令获取节点内容，执行命令：get /zk</p><pre><code>[zk: localhost:2181(CONNECTED) 3] get /zkdatacZxid = 0x2ctime = Thu Aug 02 15:48:28 CST 2018mZxid = 0x2mtime = Thu Aug 02 15:48:28 CST 2018pZxid = 0x2cversion = 0dataVersion = 0aclVersion = 0ephemeralOwner = 0x0dataLength = 4numChildren = 0[zk: localhost:2181(CONNECTED) 4]</code></pre><p> 通过set命令来对节点内容进行设置，执行命令：set /zk &lt;新的内容&gt;</p><pre><code>[zk: localhost:2181(CONNECTED) 5] set /zk newdatacZxid = 0x2ctime = Thu Aug 02 15:48:28 CST 2018mZxid = 0x3mtime = Thu Aug 02 15:57:33 CST 2018pZxid = 0x2cversion = 0dataVersion = 1aclVersion = 0ephemeralOwner = 0x0dataLength = 7numChildren = 0[zk: localhost:2181(CONNECTED) 6]</code></pre><p> 使用delete命令删除节点，delete &lt;节点名称&gt;</p><pre><code>[zk: localhost:2181(CONNECTED) 7] delete /zk[zk: localhost:2181(CONNECTED) 8] 查看节点被删情况[zk: localhost:2181(CONNECTED) 8] get /zkNode does not exist: /zk[zk: localhost:2181(CONNECTED) 9]</code></pre><p> 常用命令：</p><pre><code>stat path [watch]set path data [version]ls path [watch]delquota [-n|-b] pathls2 path [watch]setAcl path aclsetquota -n|-b val pathhistory redo cmdnoprintwatches on|offdelete path [version]sync pathlistquota pathrmr pathget path [watch]create [-s] [-e] path data acladdauth scheme authquit getAcl pathclose connect host:port</code></pre></li></ol>]]></content>
+    
+    <summary type="html">
+    
+      &lt;p&gt;本章将详细讲解zookeeper本地化安装和使用。&lt;/p&gt;
+    
+    </summary>
+    
+    
+      <category term="-zookeeper" scheme="http://yoursite.com/tags/zookeeper/"/>
+    
+  </entry>
   
   <entry>
     <title>test zookeeper</title>

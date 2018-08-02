@@ -1,0 +1,252 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <meta charset="utf-8">
+  
+  <title>zookeeper源码详解一 | Hexo</title>
+  <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
+  <meta name="description" content="本章将详细讲解zookeeper本地化安装和使用。">
+<meta name="keywords" content="-zookeeper">
+<meta property="og:type" content="article">
+<meta property="og:title" content="zookeeper源码详解一">
+<meta property="og:url" content="http://yoursite.com/2018/08/02/zookeeper源码详解一/index.html">
+<meta property="og:site_name" content="Hexo">
+<meta property="og:description" content="本章将详细讲解zookeeper本地化安装和使用。">
+<meta property="og:locale" content="default">
+<meta property="og:image" content="http://yoursite.com/2018/08/02/zookeeper源码详解一/zk_install_dir.jpg">
+<meta property="og:updated_time" content="2018-08-02T08:03:52.543Z">
+<meta name="twitter:card" content="summary">
+<meta name="twitter:title" content="zookeeper源码详解一">
+<meta name="twitter:description" content="本章将详细讲解zookeeper本地化安装和使用。">
+<meta name="twitter:image" content="http://yoursite.com/2018/08/02/zookeeper源码详解一/zk_install_dir.jpg">
+  
+    <link rel="alternative" href="/atom.xml" title="Hexo" type="application/atom+xml">
+  
+  
+    <link rel="icon" href="/favicon.png">
+  
+  <link href="//fonts.googleapis.com/css?family=Source+Code+Pro" rel="stylesheet" type="text/css">
+  <link rel="stylesheet" href="/css/style.css">
+  
+
+</head>
+<body>
+  <div id="container">
+    <div id="wrap">
+      <div class="outer">
+        <section id="main"><article id="post-zookeeper源码详解一" class="article article-type-post" itemscope itemprop="blogPost">
+  
+  <div class="article-inner">
+    
+      <header class="article-header">
+        
+  
+    <h1 class="article-title" itemprop="name">
+      zookeeper源码详解一
+    </h1>
+  
+
+      </header>
+    
+    <div class="article-meta">
+      <a href="/2018/08/02/zookeeper源码详解一/" class="article-date">
+  <time datetime="2018-08-02T06:50:35.000Z" itemprop="datePublished">2018-08-02</time>
+</a>
+      
+    </div>
+    <div class="article-entry" itemprop="articleBody">
+      
+        <p>本章将详细讲解zookeeper本地化安装和使用。</p>
+<a id="more"></a>
+<p>mac使用brew安装更为方便：</p>
+<p>$ brew info zookeeper<br>查看mac可以下载的zk版本信息， 结果如下：<br>zookeeper: stable 3.4.12 (bottled), HEAD<br>Centralized server for distributed coordination of services<br><a href="https://zookeeper.apache.org/" target="_blank" rel="noopener">https://zookeeper.apache.org/</a><br>/usr/local/Cellar/zookeeper/3.4.12 (243 files, 32.9MB) *<br>  Poured from bottle on 2018-05-24 at 18:24:44<br>From: <a href="https://github.com/Homebrew/homebrew-core/blob/master/Formula/zookeeper.rb" target="_blank" rel="noopener">https://github.com/Homebrew/homebrew-core/blob/master/Formula/zookeeper.rb</a><br>==&gt; Dependencies<br>Optional: python@2 ✘<br>==&gt; Options<br>–with-perl<br>    Build Perl bindings<br>--with-python@2<br>    Build with python@2 support<br>–HEAD<br>    Install HEAD version<br>==&gt; Caveats<br>To have launchd start zookeeper now and restart at login:<br>  brew services start zookeeper<br>Or, if you don’t want/need a background service you can just run:<br>  zkServer start</p>
+<p>$ brew install zookeeper<br>使用brew安装zk。</p>
+<p>$ cd /usr/local/etc/zookeeper<br>查看安装情况。<br><img src="/2018/08/02/zookeeper源码详解一/zk_install_dir.jpg" title="zk安装目录"></p>
+<p>$ zkServer<br>启动zk服务端。<br>Using config: /usr/local/etc/zookeeper/zoo.cfg<br>Usage: ./zkServer.sh {start|start-foreground|stop|restart|status|upgrade|print-cmd}</p>
+<p>$ zkServer status<br>ZooKeeper JMX enabled by default<br>Using config: /usr/local/etc/zookeeper/zoo.cfg<br>Error contacting service. It is probably not running.</p>
+<p>$ zkServer start<br>ooKeeper JMX enabled by default<br>Using config: /usr/local/etc/zookeeper/zoo.cfg<br>Starting zookeeper … STARTED</p>
+<p>zk缺省配置下可以本地调用zk client操作。<br>启动zk客户端命令： $ zkCli<br>Connecting to localhost:2181<br>Welcome to ZooKeeper!<br>JLine support is enabled<br>[zk: localhost:2181(CONNECTING) 0]<br>WATCHER::</p>
+<p>WatchedEvent state:SyncConnected type:None path:null</p>
+<p>[zk: localhost:2181(CONNECTED) 0]<br>[zk: localhost:2181(CONNECTED) 0] </p>
+<p>在此已经通过zk服务端已经通过监听默认端口2181和客户端建立tcp长链接， 可以进行你的操作啦。</p>
+<ol start="2">
+<li><p>zk简单操作篇。<br> 常用命令：<br> 使用ls命令查看当前Zookeeper中所包含的内容：ls /</p>
+<pre><code>[zk: localhost:2181(CONNECTED) 0] ls /
+[zookeeper]
+[zk: localhost:2181(CONNECTED) 1]
+</code></pre><p> 创建一个新的Znode节点”zk”，以及和它相关字符，执行命令：create /zk data</p>
+<pre><code>[zk: localhost:2181(CONNECTED) 1] create /zk &lt;内容&gt;
+Created /zk
+[zk: localhost:2181(CONNECTED) 2]
+
+[zk: localhost:2181(CONNECTED) 2] ls /
+[zk, zookeeper]
+[zk: localhost:2181(CONNECTED) 3] 
+</code></pre><p> 使用get命令获取节点内容，执行命令：get /zk</p>
+<pre><code>[zk: localhost:2181(CONNECTED) 3] get /zk
+data
+cZxid = 0x2
+ctime = Thu Aug 02 15:48:28 CST 2018
+mZxid = 0x2
+mtime = Thu Aug 02 15:48:28 CST 2018
+pZxid = 0x2
+cversion = 0
+dataVersion = 0
+aclVersion = 0
+ephemeralOwner = 0x0
+dataLength = 4
+numChildren = 0
+[zk: localhost:2181(CONNECTED) 4]
+</code></pre><p> 通过set命令来对节点内容进行设置，执行命令：set /zk &lt;新的内容&gt;</p>
+<pre><code>[zk: localhost:2181(CONNECTED) 5] set /zk newdata
+cZxid = 0x2
+ctime = Thu Aug 02 15:48:28 CST 2018
+mZxid = 0x3
+mtime = Thu Aug 02 15:57:33 CST 2018
+pZxid = 0x2
+cversion = 0
+dataVersion = 1
+aclVersion = 0
+ephemeralOwner = 0x0
+dataLength = 7
+numChildren = 0
+[zk: localhost:2181(CONNECTED) 6]
+</code></pre><p> 使用delete命令删除节点，delete &lt;节点名称&gt;</p>
+<pre><code>[zk: localhost:2181(CONNECTED) 7] delete /zk
+[zk: localhost:2181(CONNECTED) 8] 
+查看节点被删情况
+[zk: localhost:2181(CONNECTED) 8] get /zk
+Node does not exist: /zk
+[zk: localhost:2181(CONNECTED) 9]
+</code></pre><p> 常用命令：</p>
+<pre><code>stat path [watch]
+set path data [version]
+ls path [watch]
+delquota [-n|-b] path
+ls2 path [watch]
+setAcl path acl
+setquota -n|-b val path
+history 
+redo cmdno
+printwatches on|off
+delete path [version]
+sync path
+listquota path
+rmr path
+get path [watch]
+create [-s] [-e] path data acl
+addauth scheme auth
+quit 
+getAcl path
+close 
+connect host:port
+</code></pre></li>
+</ol>
+
+      
+
+      
+        
+    </div>
+  </div>
+  
+    
+<nav id="article-nav">
+  
+  
+    <a href="/2018/08/02/test-zookeeper/" id="article-nav-older" class="article-nav-link-wrap">
+      <strong class="article-nav-caption">Older</strong>
+      <div class="article-nav-title">test zookeeper</div>
+    </a>
+  
+</nav>
+
+  
+</article>
+
+
+<section id="comments">
+  <link rel="stylesheet" href="https://imsun.github.io/gitment/style/default.css">
+  <script src='https://imsun.github.io/gitment/dist/gitment.browser.js'></script>
+  <script>
+    var gitment = new Gitment({
+      owner: 'your github account',
+      repo: 'your repo',
+      oauth: {
+        client_id: 'your client_id',
+        client_secret: 'your client_secret',
+      },
+    })
+    gitment.render('comments')
+  </script>
+</section>
+
+</section>
+        <aside id="sidebar">
+  <nav class="menus">
+  	<ul>
+  		<li><a href="/"><i class="icon icon-home"></i></a></li>
+  		
+			<li><a href="/archives"><i class="icon icon-fenlei"></i></a></li>
+  		
+  		
+			<li><a href="/tags"><i class="icon icon-tag"></i></a></li>
+  		
+  		
+  			<li><a href="https://github.com/hejianxian" target="_blank"><i class="icon icon-github"></i></a></li>
+  		
+  	</ul>
+  </nav>
+  <a id="go-top" href="#"><i class="icon icon-up"></i></a>
+</aside>
+
+      </div>
+      <footer id="footer">
+  
+	<div id="footer-info" class="inner">
+	  &copy; 2018 muzhu 
+	  - Powered by <a href="http://hexo.io/" target="_blank">Hexo</a>
+	  - Theme <a href="https://github.com/hejianxian/hexo-theme-jane/" target="_blank">Jane</a>
+	</div>
+</footer>
+
+    </div>
+    <nav id="mobile-nav">
+  
+    <a href="/" class="mobile-nav-link">Home</a>
+  
+    <a href="/archives" class="mobile-nav-link">Archives</a>
+  
+    <a href="/tags" class="mobile-nav-link">Tag</a>
+  
+    <a href="https://github.com/hejianxian" class="mobile-nav-link">Github</a>
+  
+</nav>
+    
+<script>
+  var disqus_shortname = 'XXX';
+  
+  var disqus_url = 'http://yoursite.com/2018/08/02/zookeeper源码详解一/';
+  
+  (function(){
+    var dsq = document.createElement('script');
+    dsq.type = 'text/javascript';
+    dsq.async = true;
+    dsq.src = '//' + disqus_shortname + '.disqus.com/embed.js';
+    (document.getElementsByTagName('head')[0] || document.getElementsByTagName('body')[0]).appendChild(dsq);
+  })();
+</script>
+
+
+<script src="//cdn.bootcss.com/jquery/2.0.3/jquery.min.js"></script>
+
+
+  <link rel="stylesheet" href="/fancybox/jquery.fancybox.css">
+  <script src="/fancybox/jquery.fancybox.pack.js"></script>
+
+
+<script src="/js/script.js"></script>
+
+  </div>
+</body>
+</html>
